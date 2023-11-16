@@ -1,0 +1,55 @@
+const express = require('express');
+const router = express.Router();
+const User = require('../models/User');
+
+// Fetch all users
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// Fetch user by ID
+router.get('/:id', async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// Create a new user
+router.post('/create', async (req, res) => {
+  const { username, email, phone } = req.body;
+
+  try {
+    const newUser = new User({
+      username,
+      email,
+      phone,
+      creationDate: new Date(),
+    });
+
+    const savedUser = await newUser.save();
+
+    res.status(201).json(savedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+module.exports = router;

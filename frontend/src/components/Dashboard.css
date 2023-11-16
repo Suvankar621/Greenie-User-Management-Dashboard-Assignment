@@ -1,0 +1,34 @@
+.Dashboard{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1vmax;
+}
+.Dashboard button{
+    margin: 1vmax;
+    width: 10vmax;
+    height: 2.5vmax;
+    border-radius: 12px;
+    border: none;
+    background-color: rgb(255, 247, 0);
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+
+
+    
+}
+.Dashboard button:active{
+    background-color: rgb(187, 180, 0);
+}
+
+@media only screen and (max-width: 600px){
+    .Dashboard button{
+        width: 11vmax;
+        height: 3vmax;
+    text-align: center;
+      font-size: 7px;
+      padding: 1vmax;
+        
+    }
+}
